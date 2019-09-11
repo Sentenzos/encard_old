@@ -1,0 +1,455 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald");
+@import url("https://fonts.googleapis.com/css?family=Rubik");
+@import url("https://fonts.googleapis.com/css?family=Asap");
+@import url("https://fonts.googleapis.com/css?family=Fascinate+Inline");
+@import url("https://fonts.googleapis.com/css?family=Viga");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+@import url("https://fonts.googleapis.com/css?family=Russo+One");
+@import url("https://fonts.googleapis.com/css?family=Kanit");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
+
+.login {
+  font-family: 'Viga', sans-serif;
+  width: 6.25rem;
+  height: 3.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.login__button {
+  display: none;
+}
+
+.login__button:hover {
+  color: rgb(117, 37, 192);
+  cursor: pointer;
+}
+
+.or-button {
+  position: absolute;
+  left: 2rem;
+  top: 4.2rem;
+  display: none;
+}
+
+.register-button {
+  position: absolute;
+  left: -0.1rem;
+  top: 7rem;
+  display: none;
+}
+
+.exit-button {
+  position: absolute;
+  color: white;
+  font-family: 'Viga', sans-serif;
+  font-size: 1.2rem;
+  top: 4.5rem;
+}
+
+.register-button:hover,
+.exit-button:hover {
+  color: rgb(117, 37, 192);
+  cursor: pointer;
+}
+
+.login__window {
+  position: absolute;
+  top: 4.2rem;
+  left: -4rem;
+  height: 5rem;
+  width: 9rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.363);
+  display: none;
+}
+
+.login__name {
+  height: 0.8rem;
+  width: 7.5rem;
+  margin-left: 0.625rem;
+  margin-top: 0.3rem;
+  font-family: 'Russo One', sans-serif;
+  color: rgba(51, 100, 192, 0.863);
+}
+
+.login__password {
+  height: 0.8rem;
+  width: 7.5rem;
+  margin-left: 0.625rem;
+  font-family: 'Russo One', sans-serif;
+  color: rgba(51, 100, 192, 0.863);
+}
+
+.login__ok-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 3.45rem;
+  left: 6.375rem;
+  width: 1.875rem;
+  height: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.342);
+  font-size: 0.75rem;
+  font-family: 'Russo One', sans-serif;
+}
+
+.login__ok-button:hover,
+.reset-password__ok-button:hover,
+.reset-password__cancel-button:hover,
+.register__ok-button:hover,
+.register__cancel-button:hover {
+  background: linear-gradient(to top right, rgba(88, 158, 250, 0.226), rgba(180, 4, 157, 0.226));
+  cursor: pointer;
+}
+
+.forgot-password {
+  position: absolute;
+  top: 3.6rem;
+  left: 0.625rem;
+  color: white;
+  font-size: 0.65rem;
+}
+
+.forgot-password:hover {
+  color: rgb(117, 37, 192);
+  cursor: pointer;
+}
+
+.login__window__info {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 5rem;
+  left: -2.5rem;
+  height: 1.5rem;
+  width: 14rem;
+  font-size: 0.75rem;
+  color: rgba(74, 226, 193, 1);
+  font-family: 'Russo One', sans-serif;
+  /* background-color: black; */
+}
+
+.reset-password__window {
+  position: absolute;
+  top: 4.2rem;
+  left: -4rem;
+  height: 3.6rem;
+  width: 9rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.363);
+  display: none;
+}
+
+.reset-password__email {
+  height: 0.8rem;
+  width: 7.5rem;
+  margin-top: 0.3rem;
+  margin-left: 0.625rem;
+  font-family: 'Russo One', sans-serif;
+  color: rgba(51, 100, 192, 0.863);
+}
+
+.reset-password__ok-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 2rem;
+  left: 6.375rem;
+  width: 1.875rem;
+  height: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.342);
+  font-size: 0.75rem;
+  font-family: 'Russo One', sans-serif;
+}
+
+.reset-password__cancel-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 2rem;
+  left: 0.625rem;
+  width: 2.9rem;
+  height: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.342);
+  font-size: 0.75rem;
+  font-family: 'Russo One', sans-serif;
+}
+
+.reset-password__info {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 3.6rem;
+  left: -1.5rem;
+  height: 1.5rem;
+  width: 12rem;
+  font-size: 0.75rem;
+  color: rgba(74, 226, 193, 1);
+  font-family: 'Russo One', sans-serif;
+  /* background-color: black; */
+}
+
+.new-password__window {
+  position: absolute;
+  top: 4.2rem;
+  left: -4rem;
+  height: 5rem;
+  width: 9rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.363);
+  display: none;
+}
+
+.new-password__password1 {
+  height: 0.8rem;
+  width: 7.5rem;
+  margin-top: 0.3rem;
+  margin-left: 0.625rem;
+  font-family: 'Russo One', sans-serif;
+  color: rgba(51, 100, 192, 0.863);
+}
+
+.new-password__password2 {
+  height: 0.8rem;
+  width: 7.5rem;
+  margin-left: 0.625rem;
+  font-family: 'Russo One', sans-serif;
+  color: rgba(51, 100, 192, 0.863);
+}
+
+.new-password__ok-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 3.45rem;
+  left: 6.375rem;
+  width: 1.875rem;
+  height: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.342);
+  font-size: 0.75rem;
+  font-family: 'Russo One', sans-serif;
+}
+
+.new-password__cancel-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 3.45rem;
+  left: 0.625rem;
+  width: 2.9rem;
+  height: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.342);
+  font-size: 0.75rem;
+  font-family: 'Russo One', sans-serif;
+}
+
+.new-password__info {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 5rem;
+  left: -1.5rem;
+  height: 1.5rem;
+  width: 12rem;
+  font-size: 0.75rem;
+  color: rgba(74, 226, 193, 1);
+  font-family: 'Russo One', sans-serif;
+}
+
+.register__window {
+  position: absolute;
+  top: 4.2rem;
+  left: -4rem;
+  height: 8.5rem;
+  width: 9rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.363);
+  z-index: 10000;
+  display: none;
+}
+
+.register__name {
+  height: 0.8rem;
+  width: 7.5rem;
+  margin-left: 0.625rem;
+  margin-top: 0.3rem;
+  font-family: 'Russo One', sans-serif;
+  color: rgba(51, 100, 192, 0.863);
+}
+
+
+.register__password1 {
+  height: 0.8rem;
+  width: 7.5rem;
+  margin-left: 0.625rem;
+  font-family: 'Russo One', sans-serif;
+  color: rgba(51, 100, 192, 0.863);
+}
+
+.register__password2 {
+  height: 0.8rem;
+  width: 7.5rem;
+  margin-left: 0.625rem;
+  font-family: 'Russo One', sans-serif;
+  color: rgba(51, 100, 192, 0.863);
+}
+
+.register__email {
+  height: 0.8rem;
+  width: 7.5rem;
+  margin-left: 0.625rem;
+  font-family: 'Russo One', sans-serif;
+  color: rgba(51, 100, 192, 0.863);
+}
+
+.register__ok-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 7rem;
+  left: 6.375rem;
+  width: 1.875rem;
+  height: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.342);
+  font-size: 0.75rem;
+  font-family: 'Russo One', sans-serif;
+  color: white;
+}
+
+.register__cancel-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 7rem;
+  left: 3rem;
+  width: 2.9rem;
+  height: 1.1rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.342);
+  font-size: 0.75rem;
+  font-family: 'Russo One', sans-serif;
+  color: white;
+}
+
+.register__info {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 8.6rem;
+  left: -2.5rem;
+  height: 1.5rem;
+  width: 14rem;
+  font-size: 0.75rem;
+  color: rgba(74, 226, 193, 1);
+  /* background-color: black; */
+  font-family: 'Russo One', sans-serif;
+}
+
+.register__name::-moz-placeholder,
+.register__password1::-moz-placeholder,
+.reset-password__email::-moz-placeholder,
+.new-password__password1::-moz-placeholder,
+.new-password__password2::-moz-placeholder,
+.login__name::-moz-placeholder,
+.login__password::-moz-placeholder,
+.register__password2::-moz-placeholder,
+.register__email::-moz-placeholder {font-size: 0.78rem; }
+.register__name::-webkit-input-placeholder,
+.register__password1::-webkit-input-placeholder,
+.reset-password__email::-webkit-input-placeholder,
+.new-password__password1::-webkit-input-placeholder,
+.new-password__password2::-webkit-input-placeholder,
+.login__name::-webkit-input-placeholder,
+.login__password::-webkit-input-placeholder,
+.register__password2::-webkit-input-placeholder,
+.register__email::-webkit-input-placeholder { font-size: 0.78rem; }
+.register__name:-ms-input-placeholder,
+.register__password1:-ms-input-placeholder,
+.reset-password__email:-ms-input-placeholder,
+.new-password__password1:-ms-input-placeholder,
+.new-password__password2:-ms-input-placeholder,
+.login__name:-ms-input-placeholder,
+.login__password:-ms-input-placeholder,
+.register__password2:-ms-input-placeholder,
+.register__email:-ms-input-placeholder { font-size: 0.78rem; }
+.register__name::-ms-input-placeholder,
+.register__password1::-ms-input-placeholder,
+.reset-password__email::-ms-input-placeholder,
+.new-password__password1::-ms-input-placeholder,
+.new-password__password2::-ms-input-placeholder,
+.login__password::-ms-input-placeholder,
+.register__password2::-ms-input-placeholder,
+.register__email::-ms-input-placeholder { font-size: 0.78rem; }
+.register__name::placeholder,
+.register__password1::placeholder,
+.reset-password__email::placeholder,
+.new-password__password1::placeholder,
+.new-password__password2::placeholder,
+.login__name::placeholder,
+.login__password::placeholder,
+.register__password2::placeholder,
+.register__email::placeholder { font-size: 0.78rem; } 
+
+.center {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.center__center {
+  position: absolute;
+}
+
+
+.message__block {
+  position: absolute;
+  top: 7rem;
+  left: -15rem;
+  height: 8.5rem;
+  width: 30rem;
+  background-color: rgba(0, 0, 0, 0.11);
+  border: 1px solid rgba(173, 173, 173, 0.363);
+}
+
+.server-message {
+  color: white;
+  font-size: 0.9rem;
+  font-family: 'Russo One', sans-serif;
+  margin: 1.5rem 1rem 0rem 1rem;
+  text-align: center;
+}
+
+.time-remain {
+  color: white;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-family: 'Russo One', sans-serif;
+  margin: 1rem 1rem 0rem 1rem;
+  text-align: center;
+}
+

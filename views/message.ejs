@@ -1,0 +1,16 @@
+<% layout('./layout/layoutMessage') -%>
+<% block("title", "Message")%>
+<% block("style", "css/message.css")%>
+
+
+<div class="page__row">
+  <div class="center">
+    <div class="center__center">
+      <div class="message__block">
+        <div class="server-message"><%= message %></div>
+        <div class="time-remain">3</div>
+      </div>
+    </div>
+  </div> 
+</div>
+<script src="js/home.js"></script>

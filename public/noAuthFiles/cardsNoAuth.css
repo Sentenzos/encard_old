@@ -1,0 +1,437 @@
+.warning {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:30rem;
+  top: -2rem;
+  font-family: 'Russo One', sans-serif;
+  font-size: 0.9rem;
+}
+
+.timer {
+  font-family: 'Viga', sans-serif;
+  width: 6.25rem;
+  height: 3.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+
+.white-line {
+  position: absolute;
+  top: 9.375rem;
+  width: 20rem;
+  border-top: 1px solid white;
+  z-index: 1000;
+  -moz-box-shadow: 0 0 0.625rem rgb(255, 255, 255);
+  -webkit-box-shadow: 0 0.625rem rgb(255, 255, 255);
+  box-shadow: 0 0 0.625rem rgb(255, 255, 255);
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  margin-top: 12%; 
+}
+
+.card {
+  border: 2px solid rgba(255, 255, 255, 0.644);
+  background-color: rgba(0, 0, 0, 0.11);
+  position: relative;
+  color: white;
+  height: 18.75rem;
+  -moz-box-shadow: 0 0 0.5rem rgb(255, 255, 255);
+  -webkit-box-shadow: 0 0 0.5rem rgb(255, 255, 255);
+  box-shadow: 0 0 0.5rem rgb(255, 255, 255);
+  filter: blur(5px);
+}
+
+.eng {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  width: 30rem;
+  height: 9.375rem;
+  font-family: 'Oswald';
+
+}
+
+
+.rus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: arial;
+  font-size: 1.5rem;
+  width: 30rem;
+  height: 9.375rem;
+  font-family: 'Oswald';
+
+}
+
+.cards__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  cursor: pointer;
+  border: 1px solid rgba(173, 173, 173, 0.699);
+  font-family: 'Kanit', sans-serif;
+  font-size: 0.85rem;
+  width: 3.81rem;
+  height: 1.4rem;
+  left: 30.8rem;
+  color: white;
+}
+
+
+.cards__button:hover {
+  background: linear-gradient(to top right, rgba(88, 158, 250, 0.226), rgba(180, 4, 157, 0.226));
+}
+
+.cards__button-learned {
+  top: 7.9rem;
+}
+
+.cards__button-next {
+  top: 6rem;
+}
+
+.cards__button-repeat {
+  top: 9.8rem;
+}
+
+.cards__button-lang {
+  top: 15rem;
+}
+
+.cards__button-edit {
+  top: 20rem;
+  left: 26rem;
+}
+
+.edit-window {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.11);
+  width: 14.15rem;
+  height: 8.3rem;
+  left: 30.8rem;
+  top: 20rem;
+  border: 1px solid rgba(173, 173, 173, 0.699);
+  color: white;
+  display: none;
+}
+
+.edit-window__input__eng {
+  position: absolute;
+  opacity: 0.5;
+  font-family: 'Russo One', sans-serif;
+  width: 12rem;
+  color: rgba(0, 0, 0, 0.863);
+  background-color: rgb(132, 216, 241);
+  outline: none;
+  padding-left: 0.1rem;
+  border: 0;
+  left: 1rem;
+  top: 1rem;     
+}
+
+.edit-window__input__rus {
+  position: absolute;
+  opacity: 0.5;
+  font-family: 'Russo One', sans-serif;
+  width: 12rem;
+  color: rgba(0, 0, 0, 0.863);
+  background-color: rgb(132, 216, 241);
+  outline: none;
+  padding-left: 0.1rem;
+  border: 0;
+  left: 1rem;
+  top: 3.5rem;
+}
+
+
+.edit-window__button-ok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.151);
+  cursor: pointer;
+  border: 1px solid rgba(173, 173, 173, 0.699);
+  font-family: 'Kanit', sans-serif;
+  font-size: 0.85rem;
+  width: 2rem;
+  height: 1.1rem;
+  color: white;
+  top: 6rem;
+  left: 11.1rem;
+}
+.edit-window__button-cancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.151);
+  cursor: pointer;
+  border: 1px solid rgba(173, 173, 173, 0.699);
+  font-family: 'Kanit', sans-serif;
+  font-size: 0.85rem;
+  width: 3.3rem;
+  height: 1.1rem;
+  color: white;
+  top: 6rem;
+  left: 7.4rem;
+}
+
+.edit-window__button-del {   
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.151);
+  cursor: pointer;
+  border: 1px solid rgba(173, 173, 173, 0.699);
+  font-family: 'Kanit', sans-serif;
+  font-size: 0.85rem;
+  width: 2rem;
+  height: 1.1rem;
+  color: white;
+  top: 6rem;
+  left: 1rem;
+}
+
+.edit-window__button-ok:hover, 
+.edit-window__button-cancel:hover,
+.edit-window__button-del:hover {
+  background: linear-gradient(to top right, rgba(88, 158, 250, 0.226), rgba(180, 4, 157, 0.226));
+}
+
+
+.lang-info {
+  color: #ffffff75;
+  position: absolute;
+  top: 16.7rem;
+  left: 31.9rem;
+  font-size: 0.9rem;
+  font-family: 'Asap';
+
+}
+
+.choose-list {
+  cursor: pointer;
+  position: absolute;
+  border: 1px solid #b4b4b4b7;
+  font-family: 'Kanit', sans-serif;
+  font-size: 0.85rem;
+  width: 7rem;
+  height: 1.5rem;
+  top: 20rem;
+  left: 0rem;
+  color: white;
+  text-align-last:center;
+  background-color: rgba(85, 84, 84, 0.250);
+}
+
+option {
+  background: rgba(58, 44, 179, 0.808);
+  color: #fff;
+}
+
+.darken {
+  background-color: rgba(85, 84, 84, 0.250);
+}
+
+
+.timer {
+  font-family: 'Viga', sans-serif;
+  width: 6.25rem;
+  height: 3.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  position: relative;
+
+}
+
+.timer__button:hover {
+  color: rgba(117, 37, 192, 0.400);
+  cursor: pointer;
+ 
+}
+
+.timer__set {
+  position: relative;
+  font-family: 'Viga', sans-serif;
+  font-size: 1rem;
+  height: 3.40rem;
+  margin-right: 1rem;
+  top: -3.4rem;
+  display: none;
+}
+
+.timer__areas {
+  margin-top: 0.1rem;
+}
+
+.timer__area {
+  width: 1.8rem;
+  opacity: 0.3;
+  font-family: 'Russo One', sans-serif;
+  color: rgb(164, 0, 179);
+  height: 0.8rem;
+}
+
+.timer__space {
+  height: 0.5rem;
+  width: 4.3rem;
+
+  background-color: rgba(149, 25, 187, 0.808);
+  margin-top: 0.2rem;
+  cursor: pointer;
+}
+
+.timer__space:hover {
+  background-color: rgba(149, 25, 187, 0.432);
+}
+
+.timer__timer {
+  position: absolute;
+  font-family: 'Viga', sans-serif;
+  font-size: 1.3rem;
+  height: 3.40rem;
+  margin-right: 1rem;
+  display: none;
+}
+
+.timer__min {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  top: 0.8rem;
+  left: -2.5rem;
+}
+
+.timer__colon {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0.7rem;
+  left: -0.5rem;
+}
+
+.timer__sec {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  top: 0.8rem;
+  left: -0.1rem;
+}
+
+.timer__reset {
+  position: absolute;
+  background-color: rgba(228, 23, 23, 0.521);
+  width: 0.6rem;
+  height: 0.6rem;
+  top: 2.6rem;
+  left: -1.2rem;
+  cursor: pointer;
+}
+
+.timer__reset:hover {
+  background-color: rgb(228, 23, 23);
+}
+
+.timer__pause {
+  position: absolute;
+  width: 0.6rem;
+  top: 2.6rem;
+  left: 0.1rem;
+  cursor: pointer;
+}
+
+.timer__pause:hover > .timer__pause__column-left {
+  background-color: rgb(255, 251, 0);
+}
+
+.timer__pause:hover > .timer__pause__column-right {
+  background-color: rgb(255, 251, 0);
+}
+
+
+.timer__pause__column-left {
+  width: 0.2rem;
+  height: 0.6rem;
+  background-color: rgba(255, 251, 0, 0.582);
+}
+
+.timer__pause__column-right {
+  position: absolute;
+  top: 0rem;
+  left: 0.35rem;
+  width: 0.2rem;
+  height: 0.6rem;
+  background-color: rgba(238, 255, 0, 0.582);
+}
+
+.timer__continue {
+  position: absolute;
+  border: 0.30rem solid transparent;
+  border-left: 0.6rem solid rgba(0, 255, 0, 0.521);
+  width: 0;
+  height: 0;
+  top: 2.6rem;
+  left: 0.1rem;
+  display: none;
+  cursor: pointer;
+}
+
+.timer__continue:hover {
+  border-left: 0.6rem solid rgb(0, 255, 0);
+}
+
+.modal-message {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'Roboto Condensed', sans-serif;
+  background: rgba(255, 255, 255, 0.103);
+  border: 1px solid rgba(255, 255, 255, 0.178);
+  border-radius: 2rem;
+  cursor: pointer;
+  z-index: 9001;
+  opacity: 0;
+}
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  width: 100%;
+	height: 100%;
+}
+
+.no-auth-message {
+  position: absolute;
+  color: white;
+  font-size: 2rem;
+  top: 10rem;
+  font-family:'Russo One', sans-serif;
+}

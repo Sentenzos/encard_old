@@ -1,0 +1,157 @@
+<% layout('./layout/main') -%>
+<% block("title", `Таблицы`)%>
+<% block("style", `css/table.css`)%>
+<% block("feature", `<li>
+  <div class="search">
+    <div class="search__button" style="margin-right: 1rem;">SEARCH</div>
+    <div class="search__elems">
+      <input class="search__input" type="text">
+      <div class="search__space"></div>
+    </div>
+  </div>
+</li>`); %>
+
+<div class="page__row">
+  <div class="table-elements">
+    <div class="table">
+      <div class="warning"></div>
+      <div class="all-buttons">
+        <div class="table-sort">
+          <div class="table-sort__button">
+            S
+          </div>
+          <div class="table-sort__window">
+            <div class="table-sort__window__button z-a">z - a</div>
+            <div class="table-sort__window__button a-z colored">a - z</div>
+            <div class="table-sort__window__button a-r">а - я</div>
+            <div class="table-sort__window__button r-a">я - а</div>
+          </div>
+        </div>
+        <div class="add-word">
+          <div class="add-word__button">A</div>
+          <div class="add-word__window">
+            <input class="add-word__input add-word-eng" type="text" placeholder="english">
+            <input class="add-word__input add-word-rus" type="text" placeholder="russian">
+            <div class="add-word__button-ok">ok</div>
+            <select class="add-word__choose-list">
+              <option value="common">common</option>
+              <option value="learned">learned</option>
+              <option value="repeat">repeat</option>
+            </select>
+          </div>
+          <div class="add-word__change-accept">
+            <div class="add-word__change-accept__question">Изменить?</div>
+            <div class="add-word__change-accept__yes">yes</div>
+            <div class="add-word__change-accept__no">no</div>
+          </div>
+        </div>
+        <div class="choose-base">
+          <div class="choose-base__button">
+            B
+          </div>
+          <div class="choose-base__window">
+            <div class="choose-base__base">common</div>
+            <div class="choose-base__base">learned</div>
+            <div class="choose-base__base">repeat</div>
+            <div class="add-base">
+              <div class="add-base__button">+</div>
+              <div class="add-base__window">
+                <input class="add-base__input" type="text">
+                <div class="add-base__button-ok">ok</div>
+                <div class="add-base__button-cancel">cancel</div>
+                <div class="add-base__symbols-alert">Максимум 10 букв </div>
+              </div>            
+            </div>
+            <div class="delete-base">
+              <div class="delete-base__question">Удалить базу?</div>
+              <div class="delete-base__yes">yes</div>
+              <div class="delete-base__no">no</div>
+            </div>
+            <div class="rename-base">
+              <input class="rename-base__input" placeholder="Новое имя">
+              <div class="rename-base__yes">yes</div>
+              <div class="rename-base__no">no</div>
+            </div>
+          </div>
+        </div>
+        <div class="help">
+          <div class="help__button">
+            H
+          </div>
+          <div class="help__instructions">
+            <div class="instruction"><span style="font-family: 'Russo One', sans-serif; font-size: 1rem;">A</span> -
+              добавить слово в свою базу. Длина английского слова ограничена тридцатью символами, а длина русского сорока.</div>
+            <div class="instruction"><span style="font-family: 'Russo One', sans-serif; font-size: 1rem;">B</span> -
+              выбрать или создать базу. Длина имени базы ограничена 10-ю латинскими символами. Свои базы можно переименовывать и удалять теми же комбинациями клавиш, что и слова.</div>
+            <div class="instruction"><span style="font-family: 'Russo One', sans-serif; font-size: 1rem;">H</span> -
+              помощь, но вам это уже известно =)</div>
+            <div class="instruction"><span style="font-family: 'Russo One', sans-serif; font-size: 1rem;">S</span> -
+              сортировка таблицы по алфавиту.</div>
+            <div class="instruction">Shift + LMB по слову в таблице - перенести в другую базу. Из common слова не переносятся, а копируются.</div>
+            <div class="instruction">Ctrl + LMB по слову в таблице - удалить из базы.</div>
+            <div class="instruction">Alt + LMB по слову в таблице - редактировать.</div>         
+            <div class="instruction">common - база слов по умолчанию. Из нее можно только заимствовать
+              слова. Остальные операции заблокированы.
+            </div>           
+            <div class="instruction">learned - база в которую попадают выученные слова, после нажатия кнопки learned на странице Cards.</div>
+            <div class="instruction">repeat - база в которую попадают слова для повторного изучения, после нажатия кнопки repeat на странице Cards.</div>            
+            <div class="instruction">Для вашего же удобства, настоятельно рекомендуется использовать эти 3 базы по их назначению.</div>          
+          </div>
+        </div>
+      </div>
+      <table>
+        <THead>
+          <TR>
+            <TH class="eng">ENGLISH</TH>
+            <TH class="rus">RUSSIAN</TH>
+          </TR>
+        </THead>
+        <tbody>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+          <tr><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <div class="table__page-buttons">
+        <div class="table__page-button"><</div>
+      </div>
+    </div>
+  </div>
+  <div class="additionally">
+    <div class="base-name">Общий список</div>
+    <div class="total-words"></div>
+    <div class="delete-word">
+      <div class="delete-word__question">Удалить слова?</div>
+      <div class="delete-word__count">1</div>
+      <div class="delete-word__ok delete-word__ok--anti-closure">ok</div>
+      <div class="delete-word__cancel">cancel</div>
+    </div>
+    <div class="choose-transfer-base">
+      <span class="choose-transfer-base__close"></span>
+      <div class="choose-transfer-base__ok choose-transfer-base__ok--anti-closure">ok</div>
+      <select class="choose-transfer-base__window">
+        <option value="common">common</option>
+        <option value="learned">learned</option>
+        <option value="repeat">repeat</option>
+      </select>
+    </div>
+  </div>
+</div>
+</div>
+<script src="js/snow.js"></script>
+<script type="text/javascript" src="js/table.js"></script>

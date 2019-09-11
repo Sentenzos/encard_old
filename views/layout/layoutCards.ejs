@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title><%- block('title') %></title>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="<%- block('style') %>">
+</head>
+
+<body class="page">
+  <div class="page__row">
+    <div class="menu">
+      <div class="menu__box">
+        <ul class="menu__box-left">
+          <li><a class="menu__elem site-logo" href="/">ENG<br>
+              RUS</a></li>
+          <li><a class="menu__elem" href="/">Home</a></li>
+          <li><a class="menu__elem" href="/cards">Cards</a></li>
+          <li><a class="menu__elem" href="/tables">Word List</a></li>
+        </ul>
+        <ul class="menu__box-right">
+          <li>
+            <div class="timer">
+              <div class=' timer__set'>
+                set timer:<br>
+                <div class='timer__areas'>
+                  <input tabindex="-1" class='timer__area' type='text' placeholder='min'>
+                  <input tabindex="-1" class='timer__area' type='text' placeholder='sec'>
+                  <div class='timer__space'></div>
+                </div>
+              </div>
+              <% if(timerMin || timerSec) { %>
+              <div class='timer__button' style='margin-right: 1rem; display: none;'>TIMER</div>
+              <div class="timer__timer" style="display: block">
+                <div class="timer__min"><%= timerMin %></div>
+                <div class="timer__colon">:</div>
+                <div class="timer__sec"><%= timerSec %></div>
+                <div class="timer__reset"></div>
+                <div class="timer__pause" style="display: none;">
+                  <div class="timer__pause__column-left"></div>
+                  <div class="timer__pause__column-right"></div>
+                </div>
+                <div class="timer__continue" style="display: block;"></div>
+              </div>
+              <% } else { %>
+              <div class='timer__button' style='margin-right: 1rem;'>TIMER</div>
+              <div class="timer__timer">
+                <div class="timer__min"></div>
+                <div class="timer__colon">:</div>
+                <div class="timer__sec"></div>
+                <div class="timer__reset"></div>
+                <div class="timer__pause">
+                  <div class="timer__pause__column-left"></div>
+                  <div class="timer__pause__column-right"></div>
+                </div>
+                <div class="timer__continue"></div>
+              </div>
+              <% } %>
+            </div>
+          </li>
+          <li style="align-items: center; display: flex; position: relative;">
+            <div style="height: 80%; width: 2px; background-color: white;"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <%- body %>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<% layout('./layout/layoutCards') -%>
+<% block("title", "Карточки")%>
+<% block("style", `css/cards.css`)%>
+
+<div class="page__row">
+  <div class="cards">
+    <div class="card">
+      <div class="warning"></div>
+      <div class="eng">
+        <div class="eng-word"></div>
+      </div>
+      <div class="rus">
+        <div class="white-line">
+        </div>
+        <div class="rus-word"></div>
+      </div>
+      <div class="cards__buttons">
+        <div class="cards__button cards__button-next darken" name="next">next</div>
+        <div class="cards__button cards__button-learned darken" name="learned">learned</div>
+        <div class="cards__button cards__button-repeat darken" name="repeat">repeat</div>
+        <div class="cards__button cards__button-lang darken" name="lang">lang</div>
+        <select class="choose-list">
+          <option value="common">common</option>
+        </select>
+        <span class="lang-info">eng</span>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/cards.js"></script>

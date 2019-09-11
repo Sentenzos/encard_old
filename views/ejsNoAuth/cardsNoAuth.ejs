@@ -1,0 +1,56 @@
+<% layout('./mainNoAuth') -%>
+<% block("title", "Карточки")%>
+<% block("style", `noAuthFiles/cardsNoAuth.css`)%>
+<% block("feature", `<li>
+    <div class="timer">
+      <div class=' timer__set'>
+        set timer:<br>
+        <div class='timer__areas'>
+          <input tabindex="-1" class='timer__area' type='text' placeholder='mm'>
+          <input tabindex="-1" class='timer__area' type='text' placeholder=' ss'>
+          <div class='timer__space'></div>
+        </div>
+      </div>
+      <div class='timer__button' style='margin-right: 1rem;'>TIMER</div>
+      <div class="timer__timer">
+        <div class="timer__min"></div>
+        <div class="timer__colon">:</div>
+        <div class="timer__sec"></div>
+        <div class="timer__reset"></div>
+        <div class="timer__pause">
+          <div class="timer__pause__column-left"></div>
+          <div class="timer__pause__column-right"></div>
+        </div>
+        <div class="timer__continue"></div>
+      </div>
+    </div>
+  </li>`)%>
+
+
+<div class="page__row">
+  <div class="cards">
+      <div class="no-auth-message">Вы не авторизованы!</div>
+    <div class="card">
+      <div class="warning"></div>
+      <div class="eng">
+        <div class="eng-word"></div>
+      </div>
+      <div class="rus">
+        <div class="white-line">
+        </div>
+        <div class="rus-word"></div>
+      </div>
+      <div class="cards__buttons">
+        <div class="cards__button cards__button-next darken" name="next">next</div>
+        <div class="cards__button cards__button-learned darken" name="learned">learned</div>
+        <div class="cards__button cards__button-repeat darken" name="repeat">repeat</div>
+        <div class="cards__button cards__button-lang darken" name="lang">lang</div>
+        <select class="choose-list">
+          <option value="common">common</option>
+        </select>
+        <span class="lang-info">eng</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal"></div>

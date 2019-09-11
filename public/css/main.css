@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald");
+@import url("https://fonts.googleapis.com/css?family=Rubik");
+@import url("https://fonts.googleapis.com/css?family=Asap");
+@import url("https://fonts.googleapis.com/css?family=Fascinate+Inline");
+@import url("https://fonts.googleapis.com/css?family=Viga");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+@import url("https://fonts.googleapis.com/css?family=Russo+One");
+@import url("https://fonts.googleapis.com/css?family=Kanit");
+
+
+.page {
+  margin: 0;
+  /* background: #3c99cb; */
+  background: linear-gradient(to right, #7e08af 10%, #5858FA, #3c99cb);
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  overflow: hidden;
+  min-width: 56.25rem;
+}
+
+
+.menu {
+  height: 3.75rem;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.226);
+}
+
+.menu__box {
+  display: flex;
+  justify-content: center;
+  width: 78rem;
+  height: 3.75rem;
+  list-style: none;
+}
+
+
+.menu__box-left {
+  list-style: none;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.menu__box-right {
+  list-style: none;
+  width: 50%;
+  margin: 0;
+  margin-right: 2rem;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu__elem {
+  width: 6.25rem;
+  height: 3.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-family: 'Kanit', sans-serif;
+  font-size: 0.9rem;
+}
+
+.menu__elem:hover {
+  border-bottom: 2px solid rgb(255, 255, 255);
+}
+
+.site-logo {
+  font-family: "Fascinate Inline", cursive;
+  font-size: 1rem;
+  font-family: 'Russo One', sans-serif;
+}

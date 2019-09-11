@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title><%- block('title') %></title>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="<%- block('style') %>">
+</head>
+
+<body class="page">
+  <div class="page__row">
+    <div class="menu">
+      <div class="menu__box">
+        <ul class="menu__box-left">
+          <li><a class="menu__elem site-logo" href="/">ENG<br>
+              RUS</a></li>
+          <li><a class="menu__elem" href="/">Home</a></li>
+          <li><a class="menu__elem" href="/cards">Cards</a></li>
+          <li><a class="menu__elem" href="/tables">Word List</a></li>
+        </ul>
+        <ul class="menu__box-right">
+          <li>
+            <div class="login">
+              <% if(username) { %>
+                <div class="login__button" style="margin-right: 1.2rem;"><%=username%></div>
+              <% } else { %>
+                <div class="login__button" style="margin-right: 1.2rem;">LOGIN</div>
+                <% } %>
+              <div class="login__window">
+                <input class="login__name" type="text" placeholder="name">
+                <input class="login__password" type="password" placeholder="password"><br>
+                <div class="login__ok-button">ok</div>
+                <span class="forgot-password">Забыл пароль</span>
+                <div class="login__window__info"></div>
+              </div>
+              
+              <div class="reset-password__window">
+                <input class="reset-password__email" type="text" placeholder="email">
+                <div class="reset-password__ok-button">ok</div>
+                <div class="reset-password__cancel-button">cancel</div>
+                <div class="reset-password__info"></div>
+              </div>
+              <%  if(resetIdSuccess) {  %>
+              <div class="new-password__window" style="display: block;">
+                <input class="new-password__password1" type="password" placeholder="новый пароль"><br>
+                <input class="new-password__password2" type="password" placeholder="повторите пароль"><br>
+                <div class="new-password__ok-button">ok</div>
+                <div class="new-password__cancel-button">cancel</div>
+                <div class="new-password__info"></div>
+              </div>
+              <% } %>
+              <div class="or-button">or</div>
+              <div class="register-button">REGISTER</div>
+
+              <div class="register__window">
+                <input class="register__name" type="text" placeholder="Имя">
+                <input class="register__password1" type="password" placeholder="Пароль">
+                <input class="register__password2" type="password" placeholder="Повторите пароль">
+                <input class="register__email" type="text" placeholder="Адрес почты">
+                <div class="register__ok-button">ok</div>
+                <div class="register__cancel-button">cancel</div>
+                <div class="register__info"></div>
+              </div>
+            </div>
+          </li>
+          <li style="align-items: center; display: flex; position: relative;">
+            <div style="height: 80%; width: 2px; background-color: white;"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <%- body %>
+</body>
+
+</html>
