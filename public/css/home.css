@@ -512,10 +512,7 @@ body {
   margin: 10rem 0 0 0rem;;
   color: rgb(255, 255, 255);
   position: relative;
-  /* font-size: 1rem;
-  font-family: 'Oswald';
-  background-color: rgba(0, 0, 0, 0.226);
-  border: 1px solid rgba(255, 255, 255, 0.315); */
+
 }
 
 .news-block {
@@ -535,15 +532,6 @@ body {
   background-color: rgba(0, 0, 0, 0.226);
   border: 1px solid rgba(255, 255, 255, 0.315);
 }
-
-
-
-
-
-
-
-
-
 
 
 .svg {
