@@ -12,7 +12,7 @@ app.engine('ejs', require('ejs-locals')); // ejs-locals это сторонни�
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -52,3 +52,5 @@ app.use(function(err, req, res, next) { //ошибка приходит сюда
 app.listen(80, function() {
   console.log('Express server listening port: ' + 80)
 });
+
+//проверка
