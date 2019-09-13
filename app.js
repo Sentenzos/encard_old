@@ -1,18 +1,24 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var session = require('express-session'); 
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const Ddos = require('ddos');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const winston = require('./libs/winston');
+const session = require('express-session'); 
 
-var app = require('./libs/application');
+const app = require('./libs/application');
 
 // view engine setup
 app.engine('ejs', require('ejs-locals')); // ejs-locals это сторонний модуль. Поддерживает layout и т.д
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+let ddos = new Ddos({burst:10, limit:20, maxexpiry: 60, errormessage: 'Превышено количество запросов. Подождите 60 секунд.'});
+app.use(ddos.express);
+
+// app.use(morgan('dev'));
+app.use(morgan('combined', { stream: winston.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -52,5 +58,3 @@ app.use(function(err, req, res, next) { //ошибка приходит сюда
 app.listen(80, function() {
   console.log('Express server listening port: ' + 80)
 });
-
-//проверка

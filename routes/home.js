@@ -1,6 +1,8 @@
 const mongoClient = require('../libs/mongoDB');
 const User = require('../models/user').User;
 const nodemailer = require('nodemailer');
+const winston = require('../libs/winston');
+
 function validateEmail(email) {
 	//если true значит формат верный
 	let pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -25,17 +27,15 @@ function randomNumber(min, max) {
 
 
 
-module.exports.get = function (req, res) {
+module.exports.get = function (req, res) {	
 	res.locals.resetIdSuccess = false; //отвечает за отправку окна для изменения пароля. если false то окна не будет в html
 	res.locals.svgNum = randomNumber(1, 14);
 	if (!req.session._id) {
-		console.log('нет id вообще');
 		res.locals.username = false;
 		res.render('home');
 	} else {
 		User.findOne({ _id: req.session._id }, function (err, data) { //проверка по id
 			if (err) { //если id выдуманный и не подходит под стандарт, то тут возвращать не ошибку, а имя. в противном случае пользователь будет видеть объект с ошибкой
-				console.log('id выдуманный');
 				res.locals.username = false;
 				res.render('home');
 				return
@@ -44,15 +44,11 @@ module.exports.get = function (req, res) {
 				if (req.session.username) { //если в куках пользователя есть ник, а он должен быть
 					if (data.username === req.session.username) {
 						res.locals.username = req.session.username;
-						// console.log(`ПРОТОКОЛ `+ req.protocol);
-						// console.log(`ХОСТ `+ req.host);
 					}
 				} else { //если в куках есть id, но нет username
-					console.log('есть id, но нет username');
 					res.locals.username = false;
 				}
 			} else { //если пользователя с таким id нет
-				console.log('пользователя с таким id нет');
 				res.locals.username = false;
 			}
 			res.render('home');
@@ -75,7 +71,7 @@ module.exports.login = function (req, res) {
 	User.findOne({ username: name }, function (err, user) {
 		if (err) {
 			res.send({ err: 1 });
-			console.log(err);
+			winston.error(err);
 			return
 		}
 		if (user) {  //юзер есть
@@ -142,11 +138,11 @@ module.exports.registration = function (req, res) {
 		if (err) {
 			if (err.name === 'MongoError') {
 				res.send({ warn: 'Имя или почта уже используется' });
-				console.log(err);
+				winston.error(err);
 				return
 			} else {
 				res.send({ err: 1 });
-				console.log(err);
+				winston.error(err);
 				return
 			}
 		}
@@ -154,11 +150,11 @@ module.exports.registration = function (req, res) {
 			if (err) {
 				User.deleteOne({ username: username }, function (err) {
 					if (err) {
-						console.log(`Не удалось удалить юзера после прерывания - 1  (username: ${username})`);
+						winston.log('error', `Не удалось удалить юзера после прерывания - 1  (username: ${username})`);
 					}
 					res.send({ err: 1 });
 				})
-				console.log(err);
+				winston.error(err);
 				return
 			}
 
@@ -170,11 +166,11 @@ module.exports.registration = function (req, res) {
 				if (err) {
 					User.deleteOne({ username: username }, function (err) {
 						if (err) {
-							console.log(`Не удалось удалить юзера после прерывания - 2  (username: ${username})`);
+							winston.log('error', `Не удалось удалить юзера после прерывания - 2  (username: ${username})`);
 						}
 						res.send({ err: 1 });
 					})
-					console.log(err);
+					winston.error(err);
 					return
 				}
 				let transporter;
@@ -191,20 +187,20 @@ module.exports.registration = function (req, res) {
 				} catch (err) {
 					User.deleteOne({ username: username }, function (err) { //удаляем пользователя
 						if (err) {
-							console.log(`Не удалось удалить юзера после прерывания - 3  (username: ${username})`);
+							winston.log('error', `Не удалось удалить юзера после прерывания - 3  (username: ${username})`);
 							res.send({ err: 1 });
 							return
 						}
 						collection.deleteOne({ username: username }, function (err) { //удаляем базы слов
 							if (err) {
-								console.log(`Не удалось удалить юзера после прерывания - 4  (username: ${username})`);
+								winston.log('error', `Не удалось удалить юзера после прерывания - 4  (username: ${username})`);
 								res.send({ err: 1 });
 								return
 							}
 							res.send({ err: 1 });
 						})
 					})
-					console.log('Error: ' + err.name + ":" + err.message);
+					winston.log('Error: ' + err.name + ":" + err.message);
 					return
 				}
 				let link = `${req.protocol}://${req.get('host')}/verify?id=${doc.eHash}`
@@ -221,20 +217,20 @@ module.exports.registration = function (req, res) {
 					if (err) {
 						User.deleteOne({ username: username }, function (err) { //удаляем пользователя
 							if (err) {
-								console.log(`Не удалось удалить юзера после прерывания - 5  (username: ${username})`);
+								winston.log('error', `Не удалось удалить юзера после прерывания - 5  (username: ${username})`);
 								res.send({ err: 1 });
 								return
 							}
 							collection.deleteOne({ username: username }, function (err) { //удаляем базы слов
 								if (err) {
-									console.log(`Не удалось удалить юзера после прерывания - 6  (username: ${username})`);
+									winston.log('error', `Не удалось удалить юзера после прерывания - 6  (username: ${username})`);
 									res.send({ err: 1 });
 									return
 								}
 								res.send({ err: 1 });
 							})
 						})
-						console.log('Error: ' + err.name + ":" + err.message);
+						winston.log('error', `${err.name} : ${err.message}`);
 					} else {
 						// console.log('Message sent: %s', info.messageId);
 						// console.log('Message sent: %s', info.response);
@@ -256,7 +252,7 @@ module.exports.verify = function (req, res) {
 	User.findOne({ eHash }, (err, data) => {
 		if (err) {
 			res.render('message', {message: 'На сервере произошла  ошибка.'});	
-			console.log(err);
+			winston.error(err);
 			return
 		}
 		res.locals.resetIdSuccess = false; 
@@ -267,7 +263,7 @@ module.exports.verify = function (req, res) {
 					{ $set: { verified: true } }, (err) => {
 						if (err) {
 							res.render('message', {message: 'На сервере произошла  ошибка.'});		
-							console.log(err);
+							winston.error(err);
 							return
 						}
 						res.render('message', {message: 'Ваша почта успешно подтверждена.'});						
@@ -290,7 +286,7 @@ module.exports.resetPassSendMail = function (req, res) {
 	User.findOne({ email }, (err, data) => {
 		if (err) {
 			res.send({ err: 1 });
-			return console.log(err);
+			return winston.error(err);
 		}
 		if (data) { //если такая почта есть
 			if (data.verified) { //если пользователь подтверждал почту
@@ -298,7 +294,7 @@ module.exports.resetPassSendMail = function (req, res) {
 					User.findOneAndUpdate({ email }, { $set: { resetId: data.getResetId(), resetIdDate: Date.now() } }, { new: true }, (err, data) => {
 						if (err) {
 							res.send({ err: 1 });
-							return console.log(err);
+							return winston.error(err);
 						}
 						let transporter;
 						try {
@@ -313,7 +309,7 @@ module.exports.resetPassSendMail = function (req, res) {
 							});
 						} catch (err) {
 							res.send({ err: 1 });
-							console.log('Error: ' + err.name + ":" + err.message);
+							winston.log('error', `${err.name} : ${err.message}`);
 							return
 						}
 						let link = `${req.protocol}://${req.get('host')}/newpass?id=${data.resetId}`
@@ -329,7 +325,7 @@ module.exports.resetPassSendMail = function (req, res) {
 						transporter.sendMail(mailOptions, (err, info) => {
 							if (err) {
 								res.send({ err: 1 });
-								console.log('Error: ' + err.name + ":" + err.message);
+								winston.log('error', `${err.name} : ${err.message}`);
 							} else {
 								res.send({ success: 1 });
 							}
@@ -344,7 +340,7 @@ module.exports.resetPassSendMail = function (req, res) {
 						User.findOneAndUpdate({ email }, { $set: { resetId: data.getResetId(), resetIdDate: Date.now() } }, { new: true }, (err, data) => {
 							if (err) {
 								res.send({ err: 1 });
-								return console.log(err);
+								return winston.error(err);
 							}
 							let transporter;
 							try {
@@ -359,7 +355,7 @@ module.exports.resetPassSendMail = function (req, res) {
 								});
 							} catch (err) {
 								res.send({ err: 1 });
-								console.log('Error: ' + err.name + ":" + err.message);
+								winston.log('error', `${err.name} : ${err.message}`);
 								return
 							}
 							let link = `${req.protocol}://${req.get('host')}/newpass?id=${data.resetId}`
@@ -374,7 +370,7 @@ module.exports.resetPassSendMail = function (req, res) {
 							transporter.sendMail(mailOptions, (err, info) => {
 								if (err) {
 									res.send({ err: 1 });
-									console.log('Error: ' + err.name + ":" + err.message);
+									winston.log('error', `${err.name} : ${err.message}`);
 								} else {
 									res.send({ success: 1 });
 								}
@@ -402,7 +398,7 @@ module.exports.reqNewPass = function (req, res) {
 	User.findOne({ resetId }, (err, data) => {
 		if (err) {
 			res.render('message', {message: 'На сервере произошла  ошибка.'});
-			console.log(err);
+			winston.error(err);
 			return
 		}
 		if (data) { //если пользователь с таким resetId есть
@@ -436,7 +432,7 @@ module.exports.setNewPass = function (req, res) {
 	User.findOne({ resetId }, function (err, data) {
 		if (err) {
 			res.send({ err: 1 });
-			console.log(err);
+			winston.error(err);
 			return
 		}
 		if (data) {
@@ -444,7 +440,7 @@ module.exports.setNewPass = function (req, res) {
 				User.updateOne({ resetId }, { $set: { salt: arr[0], iteration: arr[1], hash: arr[2], resetId: 'deleted' } }, (err) => {
 					if (err) {
 						res.send({ err: 1 });
-						return console.log(err);
+						return winston.error(err);
 					}
 					req.session._id = data._id;
 					req.session.username = data.username;
@@ -479,7 +475,7 @@ module.exports.post = function (req, res) {
 
 	User.findOne({ username: username }, function (err, user) {
 
-		if (err) return console.log(err);
+		if (err) return winston.error(err);
 
 		if (user) {  //юзер есть
 			if (user.checkPassword(password)) { //пароль верный
@@ -492,7 +488,7 @@ module.exports.post = function (req, res) {
 		} else {  //юзера нет
 			var user = new User({ username: username, password: password, email: 'email@mail.com' });
 			user.save(function (err) {
-				if (err) return console.log(err);
+				if (err) return winston.error(err);
 				req.session._id = user._id;
 				req.session.username = user.username;
 				req.session.tutorial = 1;
@@ -505,10 +501,9 @@ module.exports.post = function (req, res) {
 					collection.insertMany(wordsCollections, function (err, results) {
 						if (err) {
 							res.send({ err: 1 });
-							console.log(err);
+							winston.error(err);
 							return
 						}
-						console.log(results);
 						res.send({ username: "Новый пользователь: " + user.username }); //создание пользователя окончено
 					});
 				});
