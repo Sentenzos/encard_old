@@ -4469,6 +4469,7 @@
 {"message":"176.212.177.48 - - [14/Sep/2019:01:00:58 +0000] \"GET /getBasesNames HTTP/1.1\" 304 - \"https://spicy-badger-70.localtunnel.me/cards\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 {"message":"::1 - - [14/Sep/2019:12:36:19 +0000] \"GET / HTTP/1.1\" 200 10704 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
 {"message":"::1 - - [14/Sep/2019:12:36:23 +0000] \"GET /css/home.css HTTP/1.1\" 304 - \"http://localhost/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
 {"message":"::1 - - [14/Sep/2019:12:36:23 +0000] \"GET /css/main.css HTTP/1.1\" 304 - \"http://localhost/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
@@ -4718,6 +4719,8 @@
 {"message":"::1 - - [14/Sep/2019:13:38:50 +0000] \"GET /js/table.js HTTP/1.1\" 304 - \"http://localhost/tables\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
 {"message":"::1 - - [14/Sep/2019:13:38:52 +0000] \"GET /getAllBasesNames HTTP/1.1\" 304 - \"http://localhost/tables\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
 {"message":"::1 - - [14/Sep/2019:13:38:54 +0000] \"GET /getInitBaseForTable HTTP/1.1\" 304 - \"http://localhost/tables\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36\"\n","level":"info"}
+=======
+>>>>>>> parent of cfabaac... Winston
 =======
 >>>>>>> parent of cfabaac... Winston
 =======
