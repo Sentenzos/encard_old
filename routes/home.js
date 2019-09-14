@@ -391,6 +391,7 @@ module.exports.reqNewPass = function (req, res) {
 	let resetId = req.query.id;
 	res.locals.resetIdSuccess = false; 
 	res.locals.username = false;
+	res.locals.svgNum = randomNumber(1, 14);
 	if (!resetId || resetId === 'deleted') {
 		res.render('message', {message: 'Id сброса не найден.'});
 		return
