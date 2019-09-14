@@ -19,6 +19,7 @@ module.exports.get = function (req, res) {
 
 module.exports.getInitBaseForTable = function (req, res) {
 	mongoClient.connect(function (err, client) {
+		console.log(client);
 		if (err) {
 			res.send({ err: 1 });
 			return winston.error(err);
