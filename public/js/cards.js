@@ -143,7 +143,7 @@ function wordsGenerator() {
 	}
 	var number = randomNumber(0, length - 1);
 	var engWord = Object.keys(words)[number];
-	var rusWord = Object.values(words)[number];
+	var rusWord = words[engWord];
 	if (lang == "eng") {
 		return {
 			eng: engWord,
@@ -161,18 +161,18 @@ function wordsGenerator() {
 function wordsInsert() {
 	let word = wordsGenerator();
 	if (Object.keys(words).length > 3) { //если слов в базе больше 3
-		if (!wordsInsert.state) { //при первом запуске функции state становится положительным, создается массив для отслеживания повторов
-			wordsInsert.arr = [];
-			wordsInsert.arr.push(word.eng);
+		if (!wordsInsert.state) { //при первом запуске функции state становится положительным, создается объект для отслеживания повторов
+			wordsInsert.obj = {};
+			wordsInsert.obj[word.eng] = true;
 			wordsInsert.state = 1;
 		} else { //привтором последующих запусках функци слово сначала проверяется на повторы
-			if (wordsInsert.arr.length == 4) wordsInsert.arr = wordsInsert.arr.slice(1);
-			if (wordsInsert.arr.find(arrWord => arrWord === word.eng)) {
-				while (wordsInsert.arr.find(arrWord => arrWord === word.eng)) { //до тех пор пока выпадаемое слово совпадает с одним из ключей объекта ролить другое слово
+			if (Object.keys(wordsInsert.obj).length == 4) wordsInsert.obj = {};
+			if (word.eng in wordsInsert.obj) {
+				while (word.eng in wordsInsert.obj) { //до тех пор пока выпадаемое слово совпадает с одним из ключей объекта ролить другое слово
 					word = wordsGenerator();
 				}
 			}
-			wordsInsert.arr.push(word.eng);
+			wordsInsert.obj[word.eng] = true;
 		}
 	}
 	document.querySelector('.eng-word').innerHTML = word.eng;

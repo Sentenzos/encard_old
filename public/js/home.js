@@ -383,6 +383,7 @@ function login() {
     return
   }
   if (pass.value.length < 8) {
+    console.log('короткий')
     showWarning('Пароль слишком короткий', "rgb(238, 35, 20)", info, 1000, true);
     login.working = 0;
     return
@@ -454,6 +455,10 @@ function registration(e) {
   
   if(!name || !pass|| !pass2 || !email) {
     showWarning('Заполните все поля', "rgb(238, 35, 20)", info, 1000, true);
+    console.log(name);
+    console.log(pass);
+    console.log(pass2);
+    console.log(email);
     return
 	} if (/[^a-z0-9]/i.test(name)) {
     showWarning('Для имени используйте латиницу', "rgb(238, 35, 20)", info, 1000, true);

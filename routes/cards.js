@@ -1,8 +1,6 @@
-const e = require('../libs/err');
-const mongoClient = require('../libs/mongoDB');
-const User = require('../models/user').User;
-const winston = require('../libs/winston');
-
+var e = require('../libs/err');
+var mongoClient = require('../libs/mongoDB');
+var User = require('../models/user').User;
 
 module.exports.get = function (req, res) {
 	res.locals.timerMin = 0; // переменная для таймера. Если тут не указать 0, то шаблон откажется отображаться, так как похоже не находит переменную.
@@ -11,6 +9,7 @@ module.exports.get = function (req, res) {
 		res.locals.timerMin = req.session.timerMin;
 		res.locals.timerSec = req.session.timerSec;
 	}
+	console.log(req.session)
 	res.render('cards');
 }
 
@@ -19,7 +18,8 @@ module.exports.getBase = function (req, res) {
 	mongoClient.connect(function (err, client) {
 		if (err) {
 			res.send({ err: 1 });
-			return winston.error(err);
+			console.log(err);
+			return
 		}
 		if (!req.session.wordsBase || req.session.wordsBase == "common") { //если в куках нет ранее выбранной базы (или это база common) то загружать common          
 			var db = client.db("ENRUwordsBases");
@@ -27,7 +27,8 @@ module.exports.getBase = function (req, res) {
 			collection.findOne({ baseName: "common" }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					return winston.error(err);
+					console.log(err);
+					return
 				}
 				if(data) {
 					if(data.words) {
@@ -52,7 +53,8 @@ module.exports.getBase = function (req, res) {
 			collection.findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					return winston.error(err);
+					console.log(err);
+					return
 				}
 				if (data) {
 					if (data[baseName]) {
@@ -64,7 +66,8 @@ module.exports.getBase = function (req, res) {
 						collection.findOne({ baseName: "common" }, function (err, data) {
 							if (err) {
 								res.send({ err: 1 });
-								return winston.error(err);
+								console.log(err);
+								return
 							}
 							if(data) {
 								if(data.words) {
@@ -100,7 +103,8 @@ module.exports.getBasesNames = function (req, res) {
 	mongoClient.connect(function (err, client) {
 		if (err) {
 			res.send({ err: 1 });
-			return winston.error(err);
+			console.log(err);
+			return
 		}
 		const db = client.db("ENRUwordsBases");
 		const collection = db.collection("bases");
@@ -108,7 +112,8 @@ module.exports.getBasesNames = function (req, res) {
 		collection.findOne({ username: username }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				return winston.error(err);
+				console.log(err);
+				return
 			}
 			if (!data) {
 				res.send({
@@ -141,14 +146,16 @@ module.exports.queryAnotherBase = function (req, res) {
 	mongoClient.connect(function (err, client) {
 		if (err) {
 			res.send({ err: 1 });
-			return winston.error(err);
+			console.log(err);
+			return
 		}
 		if (name === "common") {
 			const db = client.db("ENRUwordsBases");
 			db.collection('admin').findOne({ baseName: 'common' }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					return winston.error(err);
+					console.log(err);
+					return
 				}
 				if (data) {
 					res.send({
@@ -165,7 +172,8 @@ module.exports.queryAnotherBase = function (req, res) {
 			db.collection("bases").findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					return winston.error(err);
+					console.log(err);
+					return
 				}
 				if (data) { //если пользователь есть
 					if (data[name]) {
@@ -196,14 +204,16 @@ module.exports.learnedTransfer = function (req, res) {
 		User.findOne({ _id: req.session._id }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				return winston.error(err);
+				console.log(err);
+				return
 			}
 			if(data) {
 				if (data.username === "admin") { //если после проверки id подтвердилось что это admin
 					mongoClient.connect(function (err, client) {
 						if (err) {
 							res.send({ err: 1 });
-							return winston.error(err);
+							console.log(err);
+							return
 						}
 						var db = client.db("ENRUwordsBases");
 						db.collection("admin").findOne({ baseName: "common" }, function (err, data) { // проверка есть ли такое слово
@@ -219,7 +229,8 @@ module.exports.learnedTransfer = function (req, res) {
 										}, function (err, data) {
 											if (err) {
 												res.send({ err: 1 });
-												return winston.error(err);
+												console.log(err);
+												return
 											}
 											var stringSumm = "learned" + "." + eng;
 											db.collection("bases").findOneAndUpdate({ username: "admin" }, //добавление слова в learned
@@ -228,10 +239,12 @@ module.exports.learnedTransfer = function (req, res) {
 												}, function (err, data) {
 													if (err) {
 														res.send({ err: 1 });
-														return winston.error(err);
+														console.log(err);
+														return
 													}
 													res.send({ status: 1 });
-													return winston.error(err);
+													console.log(data);
+													return
 												})
 										});
 								} else { //слово не найдено
@@ -275,12 +288,14 @@ module.exports.learnedTransfer = function (req, res) {
 			const db = client.db("ENRUwordsBases");
 			if (err) {
 				res.send({ err: 1 });
-				return winston.error(err);
+				console.log(err);
+				return
 			}
 			db.collection("bases").findOne({ username: req.session.username }, function (err, data) { // поиск по пользователю
 				if (err) {
 					res.send({ err: 1 });
-					return winston.error(err);
+					console.log(err);
+					return
 				}
 				if (data) { //пользователь найден
 					if(!data[selected]) { //если нет ключа, то нельзя искать его значение - иначе краш сервера
@@ -298,7 +313,8 @@ module.exports.learnedTransfer = function (req, res) {
 							function (err, data) {
 								if (err) {
 									res.send({ err: 1 });
-									return winston.error(err);
+									console.log(err);
+									return
 								}
 								var stringSumm = "learned" + "." + eng;
 								db.collection("bases").findOneAndUpdate( //добавление слова в базу learned
@@ -308,7 +324,8 @@ module.exports.learnedTransfer = function (req, res) {
 									function (err, data) {
 										if (err) {
 											res.send({ err: 1 });
-											return winston.error(err);
+											console.log(err);
+											return
 										}
 										res.send({ status: 1 });    //если все прошло успешно
 									}
@@ -341,13 +358,15 @@ module.exports.repeatTransfer = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				return winston.error(err);
+				console.log(err);
+				return
 			}
 			const db = client.db("ENRUwordsBases");
 			db.collection("admin").findOne({ baseName: 'common' }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					return winston.error(err);
+					console.log(err);
+					return
 				}
 				if (data) { //пользователь найден
 					if(!data.words) { //если нет ключа, то нельзя искать его значение - иначе краш сервера
@@ -365,7 +384,8 @@ module.exports.repeatTransfer = function (req, res) {
 							function (err, data) {
 								if (err) {
 									res.send({ err: 1 });
-									return winston.error(err);
+									console.log(err);
+									return
 								}
 								res.send({ status: 1 });    //если все прошло успешно
 							});
@@ -385,13 +405,15 @@ module.exports.repeatTransfer = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				return winston.error(err);
+				console.log(err);
+				return
 			}
 			const db = client.db("ENRUwordsBases");
 			db.collection("bases").findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					return winston.error(err);
+					console.log(err);
+					return
 				}
 				if (data) { //пользователь найден
 					if(!data[selected]) { //если нет ключа, то нельзя искать его значение - иначе краш сервера
@@ -409,7 +431,8 @@ module.exports.repeatTransfer = function (req, res) {
 							function (err, data) {
 								if (err) {
 									res.send({ err: 1 });
-									return winston.error(err);
+									console.log(err);
+									return
 								}
 								res.send({ status: 1 });    //если все прошло успешно
 							});
