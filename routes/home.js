@@ -200,7 +200,7 @@ module.exports.registration = function (req, res) {
 							res.send({ err: 1 });
 						})
 					})
-					winston.log('Error: ' + err.name + ":" + err.message);
+					winston.log('error', `${err.name} : ${err.message}`);
 					return
 				}
 				let link = `${req.protocol}://${req.get('host')}/verify?id=${doc.eHash}`
@@ -355,8 +355,7 @@ module.exports.resetPassSendMail = function (req, res) {
 								});
 							} catch (err) {
 								res.send({ err: 1 });
-								winston.log('error', `${err.name} : ${err.message}`);
-								return
+								return winston.log('error', `${err.name} : ${err.message}`);
 							}
 							let link = `${req.protocol}://${req.get('host')}/newpass?id=${data.resetId}`
 							let mailOptions = {

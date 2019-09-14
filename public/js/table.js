@@ -1,4 +1,3 @@
-// snow();
 let sortType; //язык сортировки таблицы
 
 function autoFontSize() {
@@ -106,9 +105,7 @@ function sortTrInTbody(trList) {
 
     }
   }
-  // console.log(tbodyList[tbodyList.length - 1]);
 }
-// sortTrInTbody(addWordsInTrList.trList);
 
 
 
@@ -2003,8 +2000,6 @@ function antiClosureCtrl(event) { //вспомогательная функци�
           }
           for (let i = 0; i < operationsWithTable.arr.length; i++) {
             let index = tmpArr.indexOf(operationsWithTable.arr[i]);
-            console.log(`index ${index}`);
-            console.log(`i ${i}`);
             searchWords.words.splice(index, 1);
           }
 
@@ -2090,8 +2085,6 @@ function antiClosureShift(event) { //вспомогательная функци
             }
             for (let i = 0; i < operationsWithTable.arr.length; i++) {
               let index = tmpArr.indexOf(operationsWithTable.arr[i]);
-              console.log(`index ${index}`);
-              console.log(`i ${i}`);
               searchWords.words.splice(index, 1);
             }
           }
@@ -2634,43 +2627,4 @@ function deleteSpace(str) {
   }
   return str
 }
-
-
-// function hidePlaceholder(event) {
-//   var target = event.target;
-//   target.placeholder = "";
-//   target.onblur = function (event) {
-//     target.placeholder = "Search";
-//   }
-// }
-// document.querySelector('.search').addEventListener('focus', hidePlaceholder);
-
-
-
-
-
-
-// var value;
-// function searchWords(event) {
-//   setTimeout(function () {
-//     value = document.querySelector('.search').value;
-//     if (words[value]) {
-//       document.querySelector('tbody').remove();
-//       var tbody = document.createElement('tbody');
-//       var tr = document.createElement('tr');
-//       var td1 = document.createElement('td');
-//       var td2 = document.createElement('td');
-//       td1.innerHTML = value;
-//       td2.innerHTML = words[value];
-//       tr.appendChild(td1);
-//       tr.appendChild(td2);
-//       tbody.appendChild(tr);
-//       document.querySelector('table').appendChild(tbody);
-//     }
-//     console.log(value);
-//   }, 0);
-
-// }
-// document.querySelector('.search').addEventListener('keyup', searchWords);
-
 

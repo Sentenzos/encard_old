@@ -1,5 +1,7 @@
-var mongoClient = require('../libs/mongoDB');
-var User = require('../models/user').User;
+const mongoClient = require('../libs/mongoDB');
+const User = require('../models/user').User;
+const winston = require('../libs/winston');
+
 function deleteSpace(str) {
 	while(str.startsWith(` `)){
 		str = str.slice(1);
@@ -20,16 +22,14 @@ module.exports.getInitBaseForTable = function (req, res) {
 		console.log(client);
 		if (err) {
 			res.send({ err: 1 });
-			console.log(err);
-			return
+			return winston.error(err);
 		}
 		if (!req.session.tableWordsBase || req.session.tableWordsBase == "common") { //если в куках нет ранее выбранной базы (или это база common) то загружать common          
 			const db = client.db("ENRUwordsBases");
 			db.collection("admin").findOne({ baseName: "common" }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (data.words) {
@@ -50,13 +50,11 @@ module.exports.getInitBaseForTable = function (req, res) {
 			});
 		} else {
 			var baseName = req.session.tableWordsBase
-			console.log(req.session.tableWordsBase);
 			const db = client.db("ENRUwordsBases");
 			db.collection("bases").findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (data[baseName]) { //база есть
@@ -68,8 +66,7 @@ module.exports.getInitBaseForTable = function (req, res) {
 						db.collection("admin").findOne({ baseName: "common" }, function (err, data) {
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							if (data) {
 								if (data.words) {
@@ -93,7 +90,6 @@ module.exports.getInitBaseForTable = function (req, res) {
 					res.send({
 						warn: 'Пользователь для предзагрузки не найден'
 					});
-					console.log('Пользователь для предзагрузки не найден');
 				}
 			});
 		}
@@ -104,15 +100,13 @@ module.exports.getAllBasesNames = function (req, res) {
 	mongoClient.connect(function (err, client) {
 		if (err) {
 			res.send({ err: 1 });
-			console.log(err);
-			return
+			return winston.error(err);
 		}
 		const db = client.db("ENRUwordsBases");
 		db.collection("bases").findOne({ username: req.session.username }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			if (data) {
 				var names = [];
@@ -127,7 +121,6 @@ module.exports.getAllBasesNames = function (req, res) {
 				});
 			} else {
 				res.send({ warn: "Не удалось загрузить базы. Не найден пользователь" });
-				console.log('Не удалось загрузить базы. Не найден пользователь');
 				return
 			}
 		});
@@ -139,16 +132,14 @@ module.exports.getDirectBase = function (req, res) {
 	mongoClient.connect(function (err, client) {
 		if (err) {
 			res.send({ err: 1 });
-			console.log(err);
-			return
+			return winston.error(err);
 		}
 		if (baseName === "common") {
 			const db = client.db("ENRUwordsBases");
 			db.collection("admin").findOne({ baseName: "common" }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				req.session.tableWordsBase = 'common';
 				res.send({
@@ -161,8 +152,7 @@ module.exports.getDirectBase = function (req, res) {
 			db.collection("bases").findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) { //юзер найден
 					if (data[baseName]) { //база есть
@@ -205,15 +195,13 @@ module.exports.newBaseName = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			const db = client.db('ENRUwordsBases');
 			db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (Object.keys(data).length == 9) {
@@ -236,14 +224,11 @@ module.exports.newBaseName = function (req, res) {
 						function (err, result) {
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							res.send({
 								success: true
 							});
-							// console.log(result);
-							console.log('успех');
 						});
 				} else {
 					res.send({
@@ -271,15 +256,13 @@ module.exports.deleteBase = function (req, res) {
 	mongoClient.connect(function (err, client) {
 		if (err) {
 			res.send({ err: 1 });
-			console.log(err);
-			return
+			return winston.error(err);
 		}
 		const db = client.db("ENRUwordsBases");
 		db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			if (data) {
 				if (data[baseName]) {
@@ -288,8 +271,7 @@ module.exports.deleteBase = function (req, res) {
 						function (err, result) {
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							res.send({
 								success: 1
@@ -337,15 +319,13 @@ module.exports.renameBase = function (req, res) {
 	mongoClient.connect(function (err, client) {
 		if (err) {
 			res.send({ err: 1 });
-			console.log(err);
-			return
+			return winston.error(err);
 		}
 		const db = client.db('ENRUwordsBases');
 		db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			if (data) {
 				for (let key in data) {
@@ -363,8 +343,7 @@ module.exports.renameBase = function (req, res) {
 						function (err, result) {
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							res.send({
 								success: 1
@@ -410,23 +389,20 @@ module.exports.addNewWord = function (req, res) {
 		User.findOne({ _id: req.session._id }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			if (data) {
 				if (data.username === "admin") { //если после проверки id подтвердилось что это admin
 					mongoClient.connect(function (err, client) {
 						if (err) {
 							res.send({ err: 1 });
-							console.log(err);
-							return
+							return winston.error(err);
 						}
 						var db = client.db("ENRUwordsBases");
 						db.collection("admin").findOne({ baseName: "common" }, function (err, data) {
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							if (data) { //база common найдена
 								if (data.words[engWord]) { //если слово уже есть, то запрашивает подтверждение (генерируется другой запрос)
@@ -440,8 +416,7 @@ module.exports.addNewWord = function (req, res) {
 										{ $set: { [stringSumm]: rusWord } }, function (err, result) {
 											if (err) {
 												res.send({ err: 1 });
-												console.log(err);
-												return
+												return winston.error(err);
 											}
 											res.send({
 												success: 1             //слово добавлено
@@ -453,7 +428,6 @@ module.exports.addNewWord = function (req, res) {
 								res.send({
 									warn: "Такой базы нет"
 								});
-								console.log('Такой базы нет');
 								return
 							}
 						});
@@ -479,15 +453,13 @@ module.exports.addNewWord = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			var db = client.db('ENRUwordsBases');
 			db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) { //пользователь есть
 					if (data[baseName]) { //база есть
@@ -502,8 +474,7 @@ module.exports.addNewWord = function (req, res) {
 								{ $set: { [stringSumm]: rusWord } }, function (err, result) {
 									if (err) {
 										res.send({ err: 1 });
-										console.log(err);
-										return
+										return winston.error(err);
 									}
 									res.send({
 										success: 1             //слово добавлено
@@ -550,23 +521,20 @@ module.exports.addNewWordAccept = function (req, res) {
 		User.findOne({ _id: req.session._id }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			if (data) {
 				if (data.username === "admin") { //если после проверки id подтвердилось что это admin
 					mongoClient.connect(function (err, client) {
 						if (err) {
 							res.send({ err: 1 });
-							console.log(err);
-							return
+							return winston.error(err);
 						}
 						var db = client.db("ENRUwordsBases");
 						db.collection("admin").findOne({ baseName: "common" }, function (err, data) { // проверка есть ли такое слово
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							if (data) { //база common найдена
 								if (data.words[engWord]) {
@@ -575,8 +543,7 @@ module.exports.addNewWordAccept = function (req, res) {
 										{ $set: { [stringSumm]: rusWord } }, function (err, result) {
 											if (err) {
 												res.send({ err: 1 });
-												console.log(err);
-												return
+												return winston.error(err);
 											}
 											res.send({
 												success: 1             //слово добавлено
@@ -594,7 +561,6 @@ module.exports.addNewWordAccept = function (req, res) {
 								res.send({
 									warn: "Такой базы нет"
 								});
-								console.log('Такой базы нет');
 								return
 							}
 						});
@@ -620,15 +586,13 @@ module.exports.addNewWordAccept = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			var db = client.db('ENRUwordsBases');
 			db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) { //пользователь есть
 					if (data[baseName]) { //база есть
@@ -638,8 +602,7 @@ module.exports.addNewWordAccept = function (req, res) {
 								{ $set: { [stringSumm]: rusWord } }, function (err, result) {
 									if (err) {
 										res.send({ err: 1 });
-										console.log(err);
-										return
+										return winston.error(err);
 									}
 									res.send({
 										success: 1             //слово добавлено
@@ -684,23 +647,20 @@ module.exports.changeEngWord = function (req, res) {
 		User.findOne({ _id: req.session._id }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			if (data) {
 				if (data.username === "admin") { //если после проверки id подтвердилось что это admin
 					mongoClient.connect(function (err, client) {
 						if (err) {
 							res.send({ err: 1 });
-							console.log(err);
-							return
+							return winston.error(err);
 						}
 						var db = client.db("ENRUwordsBases");
 						db.collection("admin").findOne({ baseName: "common" }, function (err, data) {
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							if (data) { //база common найдена
 								if (data.words[oldEngWord]) { //если слово есть
@@ -723,8 +683,7 @@ module.exports.changeEngWord = function (req, res) {
 											function (err, result) {
 												if (err) {
 													res.send({ err: 1 });
-													console.log(err);
-													return
+													return winston.error(err);
 												}
 												res.send({
 													success: 1
@@ -740,8 +699,7 @@ module.exports.changeEngWord = function (req, res) {
 								res.send({
 									warn: "Такой базы нет"
 								});
-								console.log('Такой базы нет');
-								return
+								return winston.error(err);
 							}
 						});
 					});
@@ -766,15 +724,13 @@ module.exports.changeEngWord = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			var db = client.db('ENRUwordsBases');
 			db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) { //пользователь есть
 					if (data[baseName]) { //если база есть
@@ -798,8 +754,7 @@ module.exports.changeEngWord = function (req, res) {
 								function (err, result) {
 									if (err) {
 										res.send({ err: 1 });
-										console.log(err);
-										return
+										return winston.error(err);
 									}
 									res.send({
 										success: 1             //слово добавлено
@@ -842,23 +797,20 @@ module.exports.changeRusWord = function (req, res) {
 		User.findOne({ _id: req.session._id }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			if (data) {
 				if (data.username === "admin") { //если после проверки id подтвердилось что это admin
 					mongoClient.connect(function (err, client) {
 						if (err) {
 							res.send({ err: 1 });
-							console.log(err);
-							return
+							return winston.error(err);
 						}
 						var db = client.db("ENRUwordsBases");
 						db.collection("admin").findOne({ baseName: "common" }, function (err, data) {
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							if (data) { //база common найдена
 								if (data.words[engWord]) { //если английское слово есть
@@ -874,8 +826,7 @@ module.exports.changeRusWord = function (req, res) {
 											function (err, result) {
 												if (err) {
 													res.send({ err: 1 });
-													console.log(err);
-													return
+													return winston.error(err);
 												}
 												res.send({
 													success: 1
@@ -890,8 +841,7 @@ module.exports.changeRusWord = function (req, res) {
 							} else { //что-то случилось и база common не найдена
 								res.send({
 									warn: "Такой базы нет"
-								});
-								console.log('Такой базы нет');
+								});							
 								return
 							}
 						});
@@ -917,15 +867,13 @@ module.exports.changeRusWord = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			var db = client.db('ENRUwordsBases');
 			db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) { //пользователь есть
 					if (data[baseName]) { //если база есть
@@ -941,8 +889,7 @@ module.exports.changeRusWord = function (req, res) {
 									function (err, result) {
 										if (err) {
 											res.send({ err: 1 });
-											console.log(err);
-											return
+											return winston.error(err);
 										}
 										res.send({
 											success: 1             //слово добавлено
@@ -977,23 +924,20 @@ module.exports.deleteWordsFromBase = function (req, res) {
 		User.findOne({ _id: req.session._id }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			if (data) {
 				if (data.username === "admin") {
 					mongoClient.connect(function (err, client) {
 						if (err) {
 							res.send({ err: 1 });
-							console.log(err);
-							return
+							return winston.error(err);
 						}
 						var db = client.db("ENRUwordsBases");
 						db.collection("admin").findOne({ baseName: "common" }, function (err, data) {
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							if (data) {
 								if (data.words) {
@@ -1056,15 +1000,13 @@ module.exports.deleteWordsFromBase = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			var db = client.db('ENRUwordsBases');
 			db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (data[baseName]) {
@@ -1084,8 +1026,7 @@ module.exports.deleteWordsFromBase = function (req, res) {
 							function (err, result) {
 								if (err) {
 									res.send({ err: 1 });
-									console.log(err);
-									return
+									return winston.error(err);
 								}
 								res.send({
 									success: 1
@@ -1123,15 +1064,13 @@ module.exports.transferWordsFromBase = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			var db = client.db('ENRUwordsBases');
 			db.collection('admin').findOne({ baseName: 'common' }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (data.words) {
@@ -1176,23 +1115,20 @@ module.exports.transferWordsFromBase = function (req, res) {
 		User.findOne({ _id: req.session._id }, function (err, data) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			if (data) {
 				if (data.username === "admin") {
 					mongoClient.connect(function (err, client) {
 						if (err) {
 							res.send({ err: 1 });
-							console.log(err);
-							return
+							return winston.error(err);
 						}
 						var db = client.db('ENRUwordsBases');
 						db.collection('bases').findOne({ username: 'admin' }, function (err, data) {
 							if (err) {
 								res.send({ err: 1 });
-								console.log(err);
-								return
+								return winston.error(err);
 							}
 							if (data) {
 								if (data[fromBaseName]) {
@@ -1265,15 +1201,13 @@ module.exports.transferWordsFromBase = function (req, res) {
 		mongoClient.connect(function (err, client) {
 			if (err) {
 				res.send({ err: 1 });
-				console.log(err);
-				return
+				return winston.error(err);
 			}
 			var db = client.db('ENRUwordsBases');
 			db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (data[fromBaseName]) {
@@ -1361,16 +1295,14 @@ module.exports.getEngWord = function (req, res) {
 	mongoClient.connect(function (err, client) {
 		if (err) {
 			res.send({ err: 1 });
-			console.log(err);
-			return
+			return winston.error(err);
 		}
 		let db = client.db('ENRUwordsBases');
 		if (baseName === 'common') {
 			db.collection('admin').findOne({ baseName: 'common' }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (data.words) {
@@ -1398,8 +1330,7 @@ module.exports.getEngWord = function (req, res) {
 			db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (data[baseName]) {
@@ -1442,16 +1373,14 @@ module.exports.getRusWord = function (req, res) {
 	mongoClient.connect(function (err, client) {
 		if (err) {
 			res.send({ err: 1 });
-			console.log(err);
-			return
+			return winston.error(err);
 		}
 		let db = client.db('ENRUwordsBases');
 		if (baseName === 'common') {
 			db.collection('admin').findOne({ baseName: 'common' }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (data.words) {
@@ -1479,8 +1408,7 @@ module.exports.getRusWord = function (req, res) {
 			db.collection('bases').findOne({ username: req.session.username }, function (err, data) {
 				if (err) {
 					res.send({ err: 1 });
-					console.log(err);
-					return
+					return winston.error(err);
 				}
 				if (data) {
 					if (data[baseName]) {
