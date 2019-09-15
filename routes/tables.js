@@ -510,7 +510,7 @@ module.exports.addNewWordAccept = function (req, res) {
 		});
 		return
 	}
-	if (/[^а-яё,.()\|/ ]/i.test(rusWord) || rusWord.length > 30 || rusWord.length < 1) {
+	if (/[^а-яё,.()\|/ ]/i.test(rusWord) || rusWord.length > 40 || rusWord.length < 1) {
 		res.send({
 			warn: "Слово не соответствует требованиям."
 		});
