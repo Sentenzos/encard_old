@@ -50,15 +50,18 @@ window.addEventListener('resize', autoFontSizeHeight);
 
 
 function hideBottom() {
-  let height = document.documentElement.clientHeight;
-  let svg = document.querySelector('.svg');
-  let inform = document.querySelector('.information');
-  if (height < 500) {
-    svg.style.display = 'none';
-    inform.style.display = 'none';
-  } else {
-    svg.style.display = 'block';
-    inform.style.display = 'block';
+  try {
+    let height = document.documentElement.clientHeight;
+    let svg = document.querySelector('.svg');
+    let inform = document.querySelector('.information');
+    if (height < 500) {
+      svg.style.display = 'none';
+      inform.style.display = 'none';
+    } else {
+      svg.style.display = 'block';
+      inform.style.display = 'block';
+    }
+  } catch(e) {
   }
 }
 hideBottom();
@@ -398,8 +401,14 @@ function login() {
     }),
     success: function (user) {
       setTimeout(()=>{ //чтобы не моргала надпись "Выполняется..." можно потом убрать
-        if (user.err) return showWarning('Непредвиденная ошибка', "rgb(238, 35, 20)", info, 3000, true); login.working = 0;
-        if (user.warn) return showWarning(user.warn, "rgb(238, 35, 20)", info, 3000, true); login.working = 0;
+        if (user.err) {
+          login.working = 0;
+          return showWarning('Непредвиденная ошибка', "rgb(238, 35, 20)", info, 3000, true); 
+        } 
+        if (user.warn) {
+          login.working = 0;
+          return showWarning(user.warn, "rgb(238, 35, 20)", info, 3000, true); 
+        } 
   
         showWarning('', 'white', info);
         name.value = ``;
@@ -431,7 +440,10 @@ function logout(e) {
     contentType: "application/json",
     method: "GET",
     success: function (user) {
-      if (user.warn) return alert(user.warn); login.working = 0;
+      if (user.warn) {
+        login.working = 0;
+        return alert(user.warn); 
+      } 
       if (user.success) {
         let event = new Event("myClick", { bubbles: true });
         e.target.dispatchEvent(event);
@@ -492,8 +504,14 @@ function registration(e) {
       email
     }),
     success: function (user) {
-      if (user.err) return showWarning('Непредвиденная ошибка', "rgb(238, 35, 20)", info, 3000, true); registration.working = 0;
-      if (user.warn) return showWarning(user.warn, "rgb(238, 35, 20)", info, 3000, true); registration.working = 0;
+      if (user.err) {
+        registration.working = 0;
+        return showWarning('Непредвиденная ошибка', "rgb(238, 35, 20)", info, 3000, true); 
+      } 
+      if (user.warn){
+        registration.working = 0;
+        return showWarning(user.warn, "rgb(238, 35, 20)", info, 3000, true); 
+      } 
       if (user.success) {
         showWarning('На почту отправдено письмо...', "rgba(74, 226, 193, 1)", info);
         setTimeout(()=>{showWarning('обязательно проверь его!', "rgba(74, 226, 193, 1)", info, 1500);}, 1500);
@@ -537,8 +555,14 @@ function resetPassSendMail(e) {
       email: email.value
     }),
     success: function (result) {
-      if (result.err) return showWarning('Непредвиденная ошибка', "rgb(238, 35, 20)", info, 3000, true); resetPassSendMail.working = 0;
-      if (result.warn) return showWarning(result.warn, "rgb(238, 35, 20)", info, 3000, true); resetPassSendMail.working = 0;
+      if (result.err) {
+        resetPassSendMail.working = 0;
+        return showWarning('Непредвиденная ошибка', "rgb(238, 35, 20)", info, 3000, true);
+      } 
+      if (result.warn) {
+        resetPassSendMail.working = 0;
+        return showWarning(result.warn, "rgb(238, 35, 20)", info, 3000, true);
+      } 
       if (result.success) {
         showWarning('На почту отправдено письмо', "rgba(74, 226, 193, 1)", info, 2000, true); 
         setTimeout(()=>{
@@ -591,8 +615,14 @@ function setNewPass() {
       resetId: id
     }),
     success: function (result) {
-      if (result.err) return showWarning('Непредвиденная ошибка', "rgb(238, 35, 20)", info, 3000, true); setNewPass.working = 0;
-      if (result.warn) return showWarning(result.warn, "rgb(238, 35, 20)", info, 3000, true); setNewPass.working = 0;
+      if (result.err) {
+        setNewPass.working = 0;       
+        return showWarning('Непредвиденная ошибка', "rgb(238, 35, 20)", info, 3000, true); 
+      } 
+      if (result.warn) {
+        setNewPass.working = 0;
+        return showWarning(result.warn, "rgb(238, 35, 20)", info, 3000, true); 
+      } 
       if (result.success) {
         showWarning('Пароль успешно изменен', "rgba(74, 226, 193, 1)", info, 2000, true); 
         setTimeout(()=>{
