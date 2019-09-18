@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const winston = require('./libs/winston');
 const session = require('express-session'); 
-
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 const app = require('./libs/application');
 
 // view engine setup
@@ -55,6 +55,6 @@ app.use(function(err, req, res, next) { //ошибка приходит сюда
   res.render('error');
 });
 
-app.listen(80, function() {
-  console.log('Express server listening port: ' + 80)
+app.listen(3000, function() {
+  console.log('Express server listening port: ' + 3000)
 });

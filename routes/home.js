@@ -176,12 +176,12 @@ module.exports.registration = function (req, res) {
 				let transporter;
 				try {
 					transporter = nodemailer.createTransport({
-						host: 'smtp-mail.outlook.com',
+						host: 'smtp.encard.info',
 						port: 587,
 						secure: false, // true for 465, false for other ports 587
 						auth: {
-							user: "rslnnek@hotmail.com",
-							pass: "151834qSq#"
+							user: "mail@encard.info",
+							pass: "878712qSq#"
 						}
 					});
 				} catch (err) {
@@ -205,12 +205,12 @@ module.exports.registration = function (req, res) {
 				}
 				let link = `${req.protocol}://${req.get('host')}/verify?id=${doc.eHash}`
 				let mailOptions = {
-					from: 'rslnnek@hotmail.com', // sender address
+					from: 'mail@encard.info', // sender address
 					to: `${email}`, // list of receivers
 					subject: 'Подтвердите вашу почту.', // Subject line
 					text: 'Подтверждение почты.', // plain text body
-					html: `<b>Привет ${username[0].toUpperCase() + username.slice(1)}! Для того чтобы завершить регистрацию на сайте ${req.get('host')} - подтверди почту перейдя по <a href="${link}">ссылке</a>.</b><br>
-					<b>В противном случае, при утере пароля, ты не сможешь восстановить аккаунт.</b>` // html body
+					html: `Привет ${username[0].toUpperCase() + username.slice(1)}! Для того чтобы завершить регистрацию на сайте <b>${req.get('host')}</b> - подтверди почту перейдя по <a href="${link}">ссылке</a>.<br>
+					В противном случае, при утере пароля, ты не сможешь восстановить аккаунт.` // html body
 				};
 
 				transporter.sendMail(mailOptions, (err, info) => {
@@ -299,12 +299,12 @@ module.exports.resetPassSendMail = function (req, res) {
 						let transporter;
 						try {
 							transporter = nodemailer.createTransport({
-								host: 'smtp-mail.outlook.com',
+								host: 'smtp.encard.info',
 								port: 587,
 								secure: false, // true for 465, false for other ports 587
 								auth: {
-									user: "rslnnek@hotmail.com",
-									pass: "151834qSq#"
+									user: "mail@encard.info",
+									pass: "878712qSq#"
 								}
 							});
 						} catch (err) {
@@ -315,11 +315,11 @@ module.exports.resetPassSendMail = function (req, res) {
 						let link = `${req.protocol}://${req.get('host')}/newpass?id=${data.resetId}`
 
 						let mailOptions = {
-							from: 'rslnnek@hotmail.com', // sender address
+							from: 'mail@encard.info', // sender address
 							to: `${email}`, // list of receivers
 							subject: `Восстановление пароля ${req.get('host')}`, // Subject line
 							text: 'Восстановление пароля', // plain text body
-							html: `<b>Привет ${data.username[0].toUpperCase() + data.username.slice(1)}! Для того чтобы восстановить пароль на сайте ${req.get('host')} - перейди по ссылке <a href="${link}">ссылке</a>.</b>` // html body
+							html: `Привет ${data.username[0].toUpperCase() + data.username.slice(1)}! Для того чтобы восстановить пароль на сайте <b>${req.get('host')}</b> - перейди по ссылке <a href="${link}">ссылке</a>.` // html body
 						};
 
 						transporter.sendMail(mailOptions, (err, info) => {
@@ -345,12 +345,12 @@ module.exports.resetPassSendMail = function (req, res) {
 							let transporter;
 							try {
 								transporter = nodemailer.createTransport({
-									host: 'smtp-mail.outlook.com',
+									host: 'smtp.encard.info',
 									port: 587,
 									secure: false, // true for 465, false for other ports 587
 									auth: {
-										user: "rslnnek@hotmail.com",
-										pass: "151834qSq#"
+										user: "mail@encard.info",
+										pass: "878712qSq#"
 									}
 								});
 							} catch (err) {
@@ -359,11 +359,11 @@ module.exports.resetPassSendMail = function (req, res) {
 							}
 							let link = `${req.protocol}://${req.get('host')}/newpass?id=${data.resetId}`
 							let mailOptions = {
-								from: 'rslnnek@hotmail.com', // sender address
+								from: 'mail@encard.info', // sender address
 								to: `${email}`, // list of receivers
 								subject: `Восстановление пароля ${req.get('host')}`, // Subject line
 								text: 'Восстановление пароля', // plain text body
-								html: `<b>Привет ${data.username[0].toUpperCase() + data.username.slice(1)}! Для того чтобы восстановить пароль на сайте ${req.get('host')} - перейди по ссылке <a href="${link}">ссылке</a>.</b>` // html body
+								html: `Привет ${data.username[0].toUpperCase() + data.username.slice(1)}! Для того чтобы восстановить пароль на сайте <b>${req.get('host')}</b> - перейди по ссылке <a href="${link}">ссылке</a>.` // html body
 							};
 
 							transporter.sendMail(mailOptions, (err, info) => {
