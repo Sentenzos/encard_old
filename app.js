@@ -14,7 +14,7 @@ app.engine('ejs', require('ejs-locals')); // ejs-locals это сторонни�
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-let ddos = new Ddos({burst:10, limit:20, maxexpiry: 60, errormessage: 'Превышено количество запросов. Подождите 60 секунд.'});
+let ddos = new Ddos({burst:15, limit:25, maxexpiry: 60, errormessage: 'Превышено количество запросов. Подождите 60 секунд.'});
 app.use(ddos.express);
 
 // app.use(morgan('dev'));
