@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title><%- block('title') %></title>
+  <meta name="description" content="<%- block('description') %>">
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <link rel="stylesheet" href="noAuthFiles/mainNoAuth.css">
+  <link rel="stylesheet" href="<%- block('style') %>">
+</head>
+
+<body class="page">
+  <div class="page__row">
+    <div class="menu">
+      <div class="menu__box">
+        <ul class="menu__box-left">
+          <li><a class="menu__elem site-logo" href="/"><div>EN</div>
+              CARD</a></li>
+          <li><a class="menu__elem" href="/">Home</a></li>
+          <li><a class="menu__elem" href="/cards">Cards</a></li>
+          <li><a class="menu__elem" href="/tables">Word List</a></li>
+        </ul>
+        <ul class="menu__box-right">
+          <%- block('feature') %>
+           <li style="align-items: center; display: flex; position: relative;">
+            <div style="height: 80%; width: 2px; background-color: white;"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<%- body %>
+</body>
+
+</html>
