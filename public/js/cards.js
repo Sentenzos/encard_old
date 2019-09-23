@@ -766,7 +766,7 @@ function darkenElems(color) {    //вспомогательная функция
 
 function colorOfState(initColor, stateColor, elem, long) { //вспомогательная функция - цвет кнопки отражающий состояние операции
 	if (!long) {
-		var long = 700;
+		var long = 200;
 	}
 	elem.style.backgroundColor = stateColor;
 	setTimeout(() => {
@@ -992,5 +992,20 @@ function modalWindow() {
 }
 
 
-
-
+function hideBottom() { 
+  try {
+    let height = document.documentElement.clientHeight;
+    let svg = document.querySelector('.svg');
+    let inform = document.querySelector('.information');
+    if (height < 500) {
+      svg.style.display = 'none';
+      inform.style.display = 'none';
+    } else {
+      svg.style.display = 'block';
+      inform.style.display = 'block';
+    }
+  } catch(e) {
+  }
+}
+hideBottom();
+window.addEventListener('resize', hideBottom);

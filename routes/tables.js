@@ -12,8 +12,14 @@ function deleteSpace(str) {
 	}
 	return str
 }
+function randomNumber(min, max) {
+	var rand = min + Math.random() * (max + 1 - min);
+	rand = Math.floor(rand);
+	return rand;
+}
 
 module.exports.get = function (req, res) {
+	res.locals.svgNum = randomNumber(1, 14); //выбор svg картинки
 	res.render('tables');
 }
 

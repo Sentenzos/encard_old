@@ -215,13 +215,14 @@
 
 
 .lang-info {
-  color: #ffffff75;
+  color: rgba(117, 37, 192, 0.842);
+  text-shadow:0 0 3px rgb(71, 181, 231);
   position: absolute;
   top: 16.7rem;
   left: 32rem;
   font-size: 0.9rem;
   font-family: 'Asap';
-
+  font-weight: 700;
 }
 
 .choose-list {
@@ -418,3 +419,20 @@ option {
 .timer__area:-ms-input-placeholder { font-size: 0.78rem; }
 .timer__area::-ms-input-placeholder { font-size: 0.78rem; }
 .timer__area::placeholder { font-size: 0.78rem; } 
+
+
+.svg {
+  min-width: 56.25rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+svg {
+  float: right;
+  height: 9rem;;
+  width: 9rem;;
+  margin-right: 1rem;
+  fill: #ffffff;
+}

@@ -49,7 +49,7 @@ autoFontSizeHeight();
 window.addEventListener('resize', autoFontSizeHeight);
 
 
-function hideBottom() {
+function hideBottom() { 
   try {
     let height = document.documentElement.clientHeight;
     let svg = document.querySelector('.svg');

@@ -2,9 +2,14 @@ const e = require('../libs/err');
 const mongoClient = require('../libs/mongoDB');
 const User = require('../models/user').User;
 const winston = require('../libs/winston');
-
+function randomNumber(min, max) {
+	var rand = min + Math.random() * (max + 1 - min);
+	rand = Math.floor(rand);
+	return rand;
+}
 
 module.exports.get = function (req, res) {
+	res.locals.svgNum = randomNumber(1, 14); //выбор svg картинки
 	res.locals.timerMin = 0; // переменная для таймера. Если тут не указать 0, то шаблон откажется отображаться, так как похоже не находит переменную.
 	res.locals.timerSec = 0;
 	if(req.session.timerMin || req.session.timerSec) { //если в куках есть цифры таймера, то передает их в locals шаблону

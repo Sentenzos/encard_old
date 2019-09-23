@@ -1249,7 +1249,7 @@ function addNewWord(event) {
       if (answer.accept) {  //если такое слово уже есть, то новый запрос на подтверждение операции
         if (addNewWord.accept) return //не дает отправлять еще один запрос, пока не выполнится подтверждение
         addNewWord.accept = 1;
-        showWarning('Такое слово уже есть в этой базе.', "rgb(238, 35, 20)", 3000, true);
+        showWarning('Такое слово уже есть в этой базе.', "rgb(238, 35, 20)", 3000, false);
         var acceptWindow = document.querySelector('.add-word__change-accept');
         acceptWindow.style.display = 'block';
         var bottonYes = document.querySelector('.add-word__change-accept__yes');
@@ -2628,3 +2628,23 @@ function deleteSpace(str) {
   return str
 }
 
+
+
+
+function hideBottom() { 
+  try {
+    let height = document.documentElement.clientHeight;
+    let svg = document.querySelector('.svg');
+    let inform = document.querySelector('.information');
+    if (height < 500) {
+      svg.style.display = 'none';
+      inform.style.display = 'none';
+    } else {
+      svg.style.display = 'block';
+      inform.style.display = 'block';
+    }
+  } catch(e) {
+  }
+}
+hideBottom();
+window.addEventListener('resize', hideBottom);
