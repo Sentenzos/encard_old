@@ -547,6 +547,7 @@ function resetPassSendMail(e) {
     resetPassSendMail.working = 0;
     return
   }
+  showWarning('Выполняется...', 'rgba(236, 201, 41, 1)', info);
   $.ajax({
     url: "/resetPassSendMail",
     contentType: "application/json",
@@ -606,6 +607,7 @@ function setNewPass() {
     setNewPass.working = 0;
     return
   } 
+  showWarning('Выполняется...', 'rgba(236, 201, 41, 1)', info);
   $.ajax({
     url: "/setNewPass",
     contentType: "application/json",
