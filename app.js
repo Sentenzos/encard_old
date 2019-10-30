@@ -34,6 +34,7 @@ app.use(session({
 
 
 app.use(express.static(path.join(__dirname, 'public'))); // статик для того чтобы не вводить полный путь к файлам в папке public. Его видят и шаблоны
+app.use('/jquery', express.static(path.join(__dirname, '/node_modules/jquery/dist/')));
 
 
 require('./routes')(app);

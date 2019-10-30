@@ -28,6 +28,7 @@ function randomNumber(min, max) {
 
 
 module.exports.get = function (req, res) {	
+	console.log(req.session)
 	res.locals.resetIdSuccess = false; //отвечает за отправку окна для изменения пароля. если false то окна не будет в html
 	res.locals.svgNum = randomNumber(1, 14);
 	if (!req.session._id) {
